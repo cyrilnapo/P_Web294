@@ -2,7 +2,7 @@
   <div class="cards">
     <h1>NOS RÉCENTS OUVRAGES</h1>
     <div class="card">
-      <img src="" />
+      <img src="../../resource/img/harry_potter.png" />
       <p class="title">Harry Potter à l'école des sorciers</p>
       <p class="genre">Science-fiction</p>
       <p class="author">J.K. Rowling</p>
@@ -14,6 +14,12 @@
 </template>
 
 <style>
+:root {
+  --blue: #254441;
+  --green: #43aa8b;
+  --white: #eeeeee;
+}
+
 @media (min-width: 1024px) {
   .cards {
     font-size: 20px;
@@ -25,8 +31,12 @@
   }
 
   .cards .card {
-    line-height: 0.5;
-    width: 50%;
+    line-height: 1;
+    white-space: pre-line;
+    width: 35%;
+    background-color: var(--blue);
+    color: var(--white);
+    padding: 10px;
   }
 }
 </style>

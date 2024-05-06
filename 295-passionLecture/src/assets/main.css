@@ -14,7 +14,6 @@ body {
 }
 
 #app {
-  margin: 0 auto;
   font-weight: normal;
   margin: 50px;
 }
@@ -24,7 +23,6 @@ a,
   text-decoration: none;
   color: var(--green);
   transition: 0.4s;
-  padding: 3px;
 }
 
 @media (hover: hover) {
