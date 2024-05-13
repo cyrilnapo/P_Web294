@@ -1,4 +1,17 @@
-<script setup></script>
+<script setup>
+let star = 4
+
+function showStars() {
+  let starChar = '★ '
+  let stars = ''
+
+  for (let i = 0; i < star; i++) {
+    stars += starChar
+  }
+
+  return stars
+}
+</script>
 
 <template>
   <div class="cards">
@@ -9,7 +22,7 @@
       <p class="author">J.K. Rowling</p>
       <p class="count_pages">225 pages</p>
       <p class="release_date">Octobre 2017</p>
-      <p class="stars">X X X X</p>
+      <p class="stars">{{ showStars() }}</p>
     </div>
   </div>
 </template>
@@ -22,7 +35,7 @@
 }
 
 .cards {
-  font-size: 15px;
+  font-size: 14px;
   width: 50%;
 }
 
@@ -34,10 +47,16 @@
   background-color: var(--blue);
   margin: auto;
   color: var(--white);
-  padding: 20px;
+  padding: 15px;
+  margin: 5px 0px 0px 0px;
 }
 
 .cards .card p {
-  margin: 1px 0; /* Réglez cette valeur selon vos besoins */
+  margin: 1px 0;
+}
+
+.cards .card .stars {
+  color: #c5bb31;
+  font-size: 1.2rem;
 }
 </style>
