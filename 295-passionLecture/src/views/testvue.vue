@@ -25,7 +25,7 @@ onMounted(fetchBooks)
 </script>
 <template>
   <main>
-    <h2>Liste de licre</h2>
+    <h2>Liste de livre</h2>
     <div>
       <BookCard v-for="book in books" v-bind:key="book.id" v-bind:book="book" />
     </div>
