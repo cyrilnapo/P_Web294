@@ -1,46 +1,53 @@
-<script setup>
-import { defineProps } from 'vue'
-const props = defineProps({
-  book: Object // Define the type of the prop
-})
-</script>
-
 <template>
   <div class="card">
-    <img :src="book.image" />
+    <img :src="book.imagePath" />
     <p class="title">{{ book.title }}</p>
-    <p class="genre">{{ book.genre }}</p>
-    <p class="author">{{ book.author }}</p>
-    <p class="count_pages">{{ book.pageCount }} pages</p>
-    <p class="release_date">{{ book.releaseDate }}</p>
-    <p class="stars">{{ book.stars }}</p>
+    <p class="abstract">{{ book.abstract }}</p>
+    <p class="author">{{ getAuthorName(book.authorId) }}</p>
+    <p class="count_pages">{{ book.numberOfPages }} pages</p>
+    <p class="edition_year">Edition Year: {{ book.editionYear }}</p>
+    <a :href="book.pdfLink" target="_blank">PDF Link</a>
   </div>
 </template>
 
+<script setup>
+import { defineProps } from 'vue'
+
+const props = defineProps({
+  book: Object // Define the type of the prop
+})
+
+// Simulated data mapping for authorId to author name
+const authorMap = {
+  1: 'Xavier Parmentier',
+  2: 'Jules Verne'
+}
+
+// Function to get author name based on authorId
+function getAuthorName(authorId) {
+  return authorMap[authorId] || 'Unknown Author'
+}
+</script>
+
 <style scoped>
-:root {
-  --blue: #254441;
-  --green: #43aa8b;
-  --white: #eeeeee;
-}
-
-.cards {
-  font-size: 15px;
-  width: 50%;
-}
-
-.cards h1 {
-  text-align: center;
-}
-
-.cards .card {
-  background-color: var(--blue);
+.card {
+  background-color: #254441;
   margin: auto;
-  color: var(--white);
+  color: #eeeeee;
   padding: 20px;
 }
 
-.cards .card p {
+.card img {
+  max-width: 100%;
+}
+
+.card p {
   margin: 1px 0;
+}
+
+.card a {
+  display: block;
+  color: #43aa8b;
+  margin-top: 10px;
 }
 </style>
