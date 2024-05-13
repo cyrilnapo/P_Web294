@@ -1,16 +1,19 @@
-<script setup></script>
+<script setup>
+import { defineProps } from 'vue'
+const props = defineProps({
+  book: Object // Define the type of the prop
+})
+</script>
 
 <template>
-  <div class="cards">
-    <div class="card">
-      <img src="../../resource/img/harry_potter.png" />
-      <p class="title">Harry Potter à l'école des sorciers</p>
-      <p class="genre">Science-fiction</p>
-      <p class="author">J.K. Rowling</p>
-      <p class="count_pages">225 pages</p>
-      <p class="release_date">Octobre 2017</p>
-      <p class="stars">X X X X</p>
-    </div>
+  <div class="card">
+    <img :src="book.image" />
+    <p class="title">{{ book.title }}</p>
+    <p class="genre">{{ book.genre }}</p>
+    <p class="author">{{ book.author }}</p>
+    <p class="count_pages">{{ book.pageCount }} pages</p>
+    <p class="release_date">{{ book.releaseDate }}</p>
+    <p class="stars">{{ book.stars }}</p>
   </div>
 </template>
 
@@ -38,6 +41,6 @@
 }
 
 .cards .card p {
-  margin: 1px 0; /* Réglez cette valeur selon vos besoins */
+  margin: 1px 0;
 }
 </style>
