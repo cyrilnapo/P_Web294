@@ -10,7 +10,6 @@ body {
   background-color: var(--white);
   color: var(--blue);
   font-family: 'Poppins', sans-serif;
-  display: flex;
 }
 
 #app {
