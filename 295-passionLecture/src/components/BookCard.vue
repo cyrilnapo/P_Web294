@@ -1,5 +1,5 @@
 <script setup>
-let star = 4
+/*let star = 4
 
 function showStars() {
   let starChar = '★ '
@@ -10,7 +10,7 @@ function showStars() {
   }
 
   return stars
-}
+}*/
 </script>
 
 <template>
@@ -18,8 +18,8 @@ function showStars() {
     <div class="img"><img :src="book.imagePath" /></div>
 
     <p class="title">{{ book.title }}</p>
-    <p class="abstract">{{ book.abstract }}</p>
-    <p class="author">autuer</p>
+    <!-- <p class="abstract">{{ book.abstract }}</p> -->
+    <p class="author">auteur</p>
     <p class="count_pages">{{ book.numberOfPages }} pages</p>
     <p class="edition_year">Edition Year: {{ book.editionYear }}</p>
     <a :href="book.pdfLink" target="_blank">PDF Link</a>
