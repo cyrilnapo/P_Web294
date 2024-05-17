@@ -11,6 +11,7 @@ import { RouterLink, RouterView } from 'vue-router'
       <BookCard />
     </div>
   </div>
+  <footer>Ce site a été créé par M.Velickovic, A.Zeqiri, C.Napoleone, Y.Cardis</footer>
 </template>
 
 <style scoped>
