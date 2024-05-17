@@ -14,5 +14,6 @@ import HomeText from './HomeText.vue'
 .main {
   display: flex;
   flex-direction: row-reverse;
+  width: 100%;
 }
 </style>

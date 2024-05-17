@@ -14,18 +14,16 @@
 </template>
 
 <style>
-@media (min-width: 1024px) {
-  .about {
-    font-size: 20px;
-    width: 45%;
-  }
+.about {
+  font-size: 20px;
+  width: 50%;
+}
 
-  .about h1 {
-    text-align: left;
-  }
+.about h1 {
+  text-align: left;
+}
 
-  .about p {
-    font-size: 25px;
-  }
+.about p {
+  font-size: 25px;
 }
 </style>

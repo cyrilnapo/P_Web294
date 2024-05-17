@@ -3,6 +3,7 @@ import MainPage from '@/views/MainPage.vue'
 import OuvragesPage from '@/views/OuvragesPage.vue'
 import test from '@/views/testvue.vue'
 import AddComment from '../views/Addcomment.vue'
+import AddBook from '../views/AddBook.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,6 +22,11 @@ const router = createRouter({
       path: '/comment',
       name: 'comment',
       component: AddComment
+    },
+    {
+      path: '/add',
+      name: 'add',
+      component: AddBook
     }
   ]
 })

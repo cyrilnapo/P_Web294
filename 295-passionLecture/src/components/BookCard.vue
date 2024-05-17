@@ -30,11 +30,12 @@ const props = defineProps({
   color: var(--white);
   padding: 15px;
   margin: 5px 0px 0px 0px;
+  display: inline;
+  width: 250px;
 }
 
 .cards {
   font-size: 14px;
-  width: 50%;
 }
 
 .cards .card p {

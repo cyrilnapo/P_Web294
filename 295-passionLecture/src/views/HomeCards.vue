@@ -28,6 +28,14 @@ onMounted(fetchBooks)
 
 <template>
   <div>
-    <BookCard v-for="book in books" :key="book.id" :book="book" />
+    <BookCard id="book" v-for="book in books" :key="book.id" :book="book" />
   </div>
 </template>
+
+<style scoped>
+div {
+  width: 50%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+</style>
