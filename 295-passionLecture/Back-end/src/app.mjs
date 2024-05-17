@@ -5,7 +5,7 @@ const app = express()
 app.use(express.json())
 
 const port = 3000
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }))
+app.use(cors({ origin: 'http://localhost:5174', credentials: true }))
 import { sequelize, initDb } from './db/sequelize.mjs'
 
 sequelize

@@ -1,51 +1,24 @@
 <script setup>
-import BookCard from '@/components/BookCard.vue'
-
 import { ref, onMounted } from 'vue'
-import BookService from '../services/BookService.js'
+import BookCard from '../components/BookCard.vue'
 
-const books = ref([])
-const loading = ref(true)
-const error = ref(null)
+const bookData = ref(null)
 
-const fetchBooks = () => {
-  BookService.getBooks()
-    .then((response) => {
-      console.log(response.data.data)
-      books.value = response.data.data
-      loading.value = false
-    })
-    .catch((error) => {
-      console.error('Erreur lors de la récupération des livres:', error)
-      loading.value = false
-      error.value = 'Erreur lors de la récupération des livres.'
-    })
+const fetchBooks = async () => {
+  try {
+    const response = await fetch('api/books/1') // Remplacez l'URL par celle de votre API
+    const data = await response.json()
+    bookData.value = data
+  } catch (error) {
+    console.error('Error fetching book data:', error)
+  }
 }
 
 onMounted(fetchBooks)
 </script>
 
 <template>
-  <main>
-    <h1>NOS RÉCENTS OUVRAGES</h1>
-    <div>
-      <BookCard v-for="book in books" v-bind:key="book.id" v-bind:book="book" />
-    </div>
-  </main>
+  <div>
+    <BookCard :book="bookData" />
+  </div>
 </template>
-
-<style scoped>
-main {
-  width: 55%;
-}
-
-h1 {
-  text-align: center;
-}
-
-div {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  width: 100%;
-}
-</style>

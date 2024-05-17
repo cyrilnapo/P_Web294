@@ -1,28 +1,25 @@
 <script setup>
-/*let star = 4
+import { defineProps } from 'vue'
 
-function showStars() {
-  let starChar = '★ '
-  let stars = ''
-
-  for (let i = 0; i < star; i++) {
-    stars += starChar
+const props = defineProps({
+  book: {
+    type: Object,
+    required: true
   }
-
-  return stars
-}*/
+})
 </script>
 
 <template>
-  <div class="card">
-    <div class="img"><img :src="book.imagePath" /></div>
-
+  <div class="card" v-if="book">
     <p class="title">{{ book.title }}</p>
     <!-- <p class="abstract">{{ book.abstract }}</p> -->
     <p class="author">auteur</p>
     <p class="count_pages">{{ book.numberOfPages }} pages</p>
     <p class="edition_year">Edition Year: {{ book.editionYear }}</p>
     <a :href="book.pdfLink" target="_blank">PDF Link</a>
+  </div>
+  <div v-else>
+    <p>Loading book details...</p>
   </div>
 </template>
 
@@ -50,20 +47,20 @@ function showStars() {
 }
 
 .card img {
-  max-width: 100%; /* Assurer que l'image ne dépasse pas la largeur de la carte */
-  border-radius: 8px; /* Appliquer des coins arrondis à l'image */
+  max-width: 100%;
+  border-radius: 8px;
   max-height: 50px;
 }
 
 .card p {
   margin: 1px 0;
-  font-size: 14px; /* Réduire la taille de la police */
+  font-size: 14px;
 }
 
 .card a {
   display: block;
   color: #43aa8b;
   margin-top: 10px;
-  font-size: 14px; /* Réduire la taille de la police pour le lien */
+  font-size: 14px;
 }
 </style>
