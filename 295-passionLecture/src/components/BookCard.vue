@@ -1,3 +1,18 @@
+<script setup>
+let star = 4
+
+function showStars() {
+  let starChar = '★ '
+  let stars = ''
+
+  for (let i = 0; i < star; i++) {
+    stars += starChar
+  }
+
+  return stars
+}
+</script>
+
 <template>
   <div class="card">
     <div class="img"><img :src="book.imagePath" /></div>
@@ -18,10 +33,9 @@ const props = defineProps({
   book: Object // Define the type of the prop
 })
 
-// Simulated data mapping for authorId to author name
-const authorMap = {
-  1: 'Xavier Parmentier',
-  2: 'Jules Verne'
+.cards {
+  font-size: 14px;
+  width: 50%;
 }
 
 // Function to get author name based on authorId
@@ -34,10 +48,18 @@ function getAuthorName(authorId) {
 .card {
   background-color: #254441;
   margin: auto;
-  color: #eeeeee;
-  padding: 10px; /* Réduire le padding pour diminuer l'espace intérieur */
-  max-width: 300px; /* Définir une largeur maximale pour la carte */
-  border-radius: 8px; /* Ajouter des coins arrondis pour un aspect plus esthétique */
+  color: var(--white);
+  padding: 15px;
+  margin: 5px 0px 0px 0px;
+}
+
+.cards .card p {
+  margin: 1px 0;
+}
+
+.cards .card .stars {
+  color: #c5bb31;
+  font-size: 1.2rem;
 }
 
 .card img {

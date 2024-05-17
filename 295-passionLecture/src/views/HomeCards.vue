@@ -36,7 +36,7 @@ onMounted(fetchBooks)
 
 <style scoped>
 main {
-  width: 50%;
+  width: 55%;
 }
 
 h1 {
@@ -47,6 +47,5 @@ div {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   width: 100%;
-  margin: auto;
 }
 </style>
