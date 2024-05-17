@@ -1,8 +1,7 @@
 <script setup>
-import BookCard from '@/components/BookCard.vue'
-
 import { ref, onMounted } from 'vue'
 import BookService from '../services/BookService.js'
+import BookCard from '../components/BookCard.vue'
 
 const books = ref([])
 const loading = ref(true)
@@ -24,10 +23,9 @@ const fetchBooks = () => {
 
 onMounted(fetchBooks)
 </script>
-
 <template>
   <main>
-    <h1>NOS RÉCENTS OUVRAGES</h1>
+    <h2>Liste de livre</h2>
     <div>
       <BookCard v-for="book in books" v-bind:key="book.id" v-bind:book="book" />
     </div>
@@ -35,18 +33,5 @@ onMounted(fetchBooks)
 </template>
 
 <style scoped>
-main {
-  width: 50%;
-}
-
-h1 {
-  text-align: center;
-}
-
-div {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  width: 100%;
-  margin: auto;
-}
+/* Vos styles */
 </style>
