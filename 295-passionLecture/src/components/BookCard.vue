@@ -4,16 +4,16 @@ import { defineProps } from 'vue'
 const props = defineProps({
   book: {
     type: Object,
-    required: true
+    required: true,
+    default: () => ({})
   }
 })
 </script>
 
 <template>
-  <div class="card" v-if="book">
+  <div class="card" v-if="book && Object.keys(book).length > 0">
     <p class="title">{{ book.title }}</p>
-    <!-- <p class="abstract">{{ book.abstract }}</p> -->
-    <p class="author">auteur</p>
+    <p class="author">Author ID: {{ book.authorId }}</p>
     <p class="count_pages">{{ book.numberOfPages }} pages</p>
     <p class="edition_year">Edition Year: {{ book.editionYear }}</p>
     <a :href="book.pdfLink" target="_blank">PDF Link</a>
