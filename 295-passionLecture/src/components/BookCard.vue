@@ -1,5 +1,6 @@
 <script setup>
-import { defineProps } from 'vue'
+import { defineProps, ref } from 'vue'
+import BookService from '../services/BookService.js'
 
 const props = defineProps({
   book: {
@@ -8,6 +9,23 @@ const props = defineProps({
     default: () => ({})
   }
 })
+
+const category = ref(null)
+
+// Méthode pour récupérer la catégorie du livre
+const fetchCategory = () => {
+  if (props.book.categoryId) {
+    BookService.getCategory(props.book.categoryId)
+      .then((response) => {
+        category.value = response.data // Assurez-vous que votre service BookService renvoie les données de la catégorie correctement
+      })
+      .catch((error) => {
+        console.error('Erreur lors de la récupération de la catégorie:', error)
+      })
+  }
+}
+
+fetchCategory()
 </script>
 
 <template>
@@ -16,6 +34,8 @@ const props = defineProps({
     <p class="author">Author ID: {{ book.authorId }}</p>
     <p class="count_pages">{{ book.numberOfPages }} pages</p>
     <p class="edition_year">Edition Year: {{ book.editionYear }}</p>
+    <p class="category" v-if="category">Category: {{ category.name }}</p>
+    <!-- Affichage de la catégorie -->
     <a :href="book.pdfLink" target="_blank">PDF Link</a>
   </div>
   <div v-else>

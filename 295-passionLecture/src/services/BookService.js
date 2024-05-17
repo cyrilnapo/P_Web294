@@ -26,5 +26,12 @@ export default {
   },
   deleteBook(id) {
     return apiClient.delete('/api/Books/' + id)
+  },
+  getCategory(categoryId) {
+    return apiClient.get(`/api/Categories/${categoryId}`)
+  },
+
+  getAuthor(authorId) {
+    return apiClient.get(`/api/authors/${categoryId}`)
   }
 }

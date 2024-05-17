@@ -3,7 +3,6 @@ import { ref, onMounted } from 'vue'
 import BookCard from '@/components/BookCard.vue'
 
 const books = ref([]) // Ensure books is defined and initialized
-const errorMessage = ref('') // Define an error message ref
 import BookService from '../services/BookService.js'
 
 const loading = ref(true)
