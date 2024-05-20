@@ -8,6 +8,7 @@ import HomeText from './HomeText.vue'
     <HomeCards></HomeCards>
     <HomeText></HomeText>
   </div>
+  <footer>Ce site a été créé par M.Velickovic, A.Zeqiri, C.Napoleone, Y.Cardis</footer>
 </template>
 
 <style>

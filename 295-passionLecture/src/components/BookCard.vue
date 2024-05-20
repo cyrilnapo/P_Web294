@@ -1,41 +1,47 @@
 <script setup>
-import { defineProps, ref } from 'vue'
-import BookService from '../services/BookService.js'
+import { defineProps, computed } from 'vue'
 
 const props = defineProps({
   book: {
     type: Object,
     required: true,
     default: () => ({})
+  },
+  author: {
+    type: Object,
+    required: false,
+    default: () => null
+  },
+  category: {
+    type: Object,
+    required: false,
+    default: () => null
+  },
+  ratings: {
+    type: Array,
+    required: false,
+    default: () => []
   }
 })
 
-const category = ref(null)
-
-// Méthode pour récupérer la catégorie du livre
-const fetchCategory = () => {
-  if (props.book.categoryId) {
-    BookService.getCategory(props.book.categoryId)
-      .then((response) => {
-        category.value = response.data // Assurez-vous que votre service BookService renvoie les données de la catégorie correctement
-      })
-      .catch((error) => {
-        console.error('Erreur lors de la récupération de la catégorie:', error)
-      })
-  }
-}
-
-fetchCategory()
+const averageRating = computed(() => {
+  if (props.ratings.length === 0) return 0
+  const total = props.ratings.reduce((acc, rating) => acc + rating, 0)
+  return total / props.ratings.length
+})
 </script>
 
 <template>
   <div class="card" v-if="book && Object.keys(book).length > 0">
     <p class="title">{{ book.title }}</p>
-    <p class="author">Author ID: {{ book.authorId }}</p>
+    <p class="author" v-if="author">Auteur: {{ author.firstname }} {{ author.lastname }}</p>
+    <p class="author" v-else>idde l'auteur: {{ book.authorId }}</p>
     <p class="count_pages">{{ book.numberOfPages }} pages</p>
-    <p class="edition_year">Edition Year: {{ book.editionYear }}</p>
-    <p class="category" v-if="category">Category: {{ category.name }}</p>
-    <!-- Affichage de la catégorie -->
+    <p class="edition_year">Année d'apparition: {{ book.editionYear }}</p>
+    <p class="category" v-if="category">Categorie: {{ category.name }}</p>
+    <p class="average_rating">Note moyenne: {{ averageRating }}</p>
+
+    <!-- Ajout de cette ligne -->
     <a :href="book.pdfLink" target="_blank">PDF Link</a>
   </div>
   <div v-else>
@@ -49,33 +55,13 @@ fetchCategory()
   margin: auto;
   color: var(--white);
   padding: 15px;
-  margin: 5px 0px 0px 0px;
-  display: inline;
+  margin: 5px 0;
+  display: inline-block;
   width: 250px;
-}
-
-.cards {
-  font-size: 14px;
 }
 
 .cards .card p {
   margin: 1px 0;
-}
-
-.cards .card .stars {
-  color: #c5bb31;
-  font-size: 1.2rem;
-}
-
-.card img {
-  max-width: 100%;
-  border-radius: 8px;
-  max-height: 50px;
-}
-
-.card p {
-  margin: 1px 0;
-  font-size: 14px;
 }
 
 .card a {

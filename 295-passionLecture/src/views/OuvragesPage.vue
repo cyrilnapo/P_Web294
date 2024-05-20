@@ -58,4 +58,8 @@ header {
   flex: 0 0 calc(45% - 10px);
   margin: 10px;
 }
+footer {
+  padding: 10%;
+  text-align: center;
+}
 </style>

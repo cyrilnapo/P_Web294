@@ -54,6 +54,7 @@ const handleSubmit = async (event) => {
       <button type="submit">Ajouter</button>
     </form>
   </div>
+  <footer>Ce site a été créé par M.Velickovic, A.Zeqiri, C.Napoleone, Y.Cardis</footer>
 </template>
 
 <style scoped>

@@ -30,9 +30,10 @@ onMounted(fetchBooks)
   <div class="main">
     <div class="container">
       <CommentSection />
-      <BookCard v-for="book in books" v-bind:key="book.id" v-bind:book="book" />
+      <BookCard v-for="book in books" v-bind:key="book.id" v-bind:book="book" class="card" />
     </div>
   </div>
+  <footer>Ce site a été créé par M.Velickovic, A.Zeqiri, C.Napoleone, Y.Cardis</footer>
 </template>
 
 <style scoped>
@@ -46,5 +47,12 @@ onMounted(fetchBooks)
   display: flex;
   align-items: stretch;
   gap: 40px;
+}
+.card {
+  width: 30%;
+  height: 50%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 10%;
 }
 </style>

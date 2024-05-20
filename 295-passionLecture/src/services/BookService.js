@@ -30,8 +30,10 @@ export default {
   getCategory(categoryId) {
     return apiClient.get(`/api/Categories/${categoryId}`)
   },
-
   getAuthor(authorId) {
-    return apiClient.get(`/api/authors/${categoryId}`)
+    return apiClient.get(`/api/authors/${authorId}`)
+  },
+  getBookRatings(bookId) {
+    return apiClient.get(`/api/books/${bookId}/notes`)
   }
 }
