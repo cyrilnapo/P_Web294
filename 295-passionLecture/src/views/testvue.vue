@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import BookService from '../services/BookService.js'
 import BookCard from '../components/BookCard.vue'
 import BookFilter from '../components/bookFilter.vue'
@@ -10,6 +10,8 @@ const authors = ref({})
 const ratings = ref({})
 const loading = ref(true)
 const error = ref(null)
+const searchTerm = ref('')
+const selectedCategory = ref('')
 
 const fetchBooks = () => {
   BookService.getBooks()
@@ -32,6 +34,7 @@ const fetchCategories = (booksData) => {
     BookService.getCategory(categoryId)
       .then((response) => {
         categories.value[categoryId] = response.data
+        console.log('Category loaded:', categoryId, response.data)
       })
       .catch((error) => {
         console.error('Erreur lors de la récupération des catégories:', error)
@@ -71,15 +74,26 @@ const fetchRatings = (booksData) => {
 }
 
 onMounted(fetchBooks)
+
+const filteredBooks = computed(() => {
+  return books.value.filter((book) => {
+    const matchesSearch = book.title.toLowerCase().includes(searchTerm.value.toLowerCase())
+    return matchesSearch
+  })
+})
+
+const handleSearch = (term) => {
+  searchTerm.value = term
+}
 </script>
 
 <template>
   <main>
-    <BookFilter />
-    <h2>Liste de livre</h2>
+    <BookFilter @search="handleSearch" />
+    <h2>Liste de livres</h2>
     <div>
       <BookCard
-        v-for="book in books"
+        v-for="book in filteredBooks"
         :key="book.id"
         :book="book"
         :author="authors[book.authorId]"
