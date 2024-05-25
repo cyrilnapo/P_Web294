@@ -94,7 +94,6 @@ const fetchUsers = (booksData) => {
     UserService.getUserById(userId)
       .then((response) => {
         users.value[userId] = response.data // Assurez-vous que response.data est l'objet utilisateur
-        console.log('User loaded:', response.data) // Log pour vérifier les données utilisateur
       })
       .catch((error) => {
         console.error('Erreur lors de la récupération des utilisateurs :', error)

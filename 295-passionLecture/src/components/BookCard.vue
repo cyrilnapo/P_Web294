@@ -41,7 +41,10 @@ const averageRating = computed(() => {
     <a class="title" v-if="$route.name === 'AllBooksView'" :href="'/comment/' + book.id">{{
       book.title
     }}</a>
-    <p class="user">Utilisateur: {{ user ? user.username : 'Inconnu' }}</p>
+    <a class="user" v-if="$route.name === 'AllBooksView'" :href="'/comment/' + book.id">{{
+      user ? user.username : 'Inconnu'
+    }}</a>
+
     <p class="author" v-if="author">Auteur: {{ author.firstname }} {{ author.lastname }}</p>
     <p class="count_pages">{{ book.numberOfPages }} pages</p>
     <p class="edition_year">Année d'apparition: {{ book.editionYear }}</p>
