@@ -6,12 +6,19 @@
       type="text"
       placeholder="Rechercher un livre..."
     />
-    <select v-model="selectedCategory" @change="handleCategoryChange">
-      <option value="">Toutes les catégories</option>
-      <option v-for="category in categories" :value="category.id" :key="category.id">
-        {{ category.name }}
-      </option>
-    </select>
+    <p>
+      <label style="display: none" for="section"></label>
+      <select v-model="newTeacher.fkSection" name="section" id="section">
+        <option
+          v-for="section in sections"
+          v-bind:key="section.id"
+          v-bind:section="section"
+          v-bind:value="section.id"
+        >
+          {{ section.name }}
+        </option>
+      </select>
+    </p>
   </div>
 </template>
 

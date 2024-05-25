@@ -1,8 +1,36 @@
+<template>
+  <main>
+    <h2>Liste de livres</h2>
+    <input
+      v-model="searchTerm"
+      @input="handleSearch"
+      type="text"
+      placeholder="Rechercher un livre..."
+    />
+    <select v-model="selectedCategory">
+      <option value="">Toutes les catégories</option>
+      <option v-for="(category, categoryId) in categories" :key="categoryId" :value="categoryId">
+        {{ category.name }}
+      </option>
+    </select>
+    <div>
+      <BookCard
+        v-for="book in filteredBooks"
+        :key="book.id"
+        :book="book"
+        :author="authors[book.authorId]"
+        :category="categories[book.categoryId]"
+        :ratings="book.ratings"
+      />
+    </div>
+  </main>
+  <footer>Ce site a été créé par M.Velickovic, A.Zeqiri, C.Napoleone, Y.Cardis</footer>
+</template>
+
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import BookService from '../services/BookService.js'
 import BookCard from '../components/BookCard.vue'
-import BookFilter from '../components/bookFilter.vue'
 
 const books = ref([])
 const categories = ref({})
@@ -78,32 +106,15 @@ onMounted(fetchBooks)
 const filteredBooks = computed(() => {
   return books.value.filter((book) => {
     const matchesSearch = book.title.toLowerCase().includes(searchTerm.value.toLowerCase())
-    return matchesSearch
+    const matchesCategory = selectedCategory.value
+      ? book.categoryId === parseInt(selectedCategory.value)
+      : true
+    return matchesSearch && matchesCategory
   })
 })
 
-const handleSearch = (term) => {
-  searchTerm.value = term
-}
+const handleSearch = () => {}
 </script>
-
-<template>
-  <main>
-    <BookFilter @search="handleSearch" />
-    <h2>Liste de livres</h2>
-    <div>
-      <BookCard
-        v-for="book in filteredBooks"
-        :key="book.id"
-        :book="book"
-        :author="authors[book.authorId]"
-        :category="categories[book.categoryId]"
-        :ratings="book.ratings"
-      />
-    </div>
-  </main>
-  <footer>Ce site a été créé par M.Velickovic, A.Zeqiri, C.Napoleone, Y.Cardis</footer>
-</template>
 
 <style scoped>
 div {

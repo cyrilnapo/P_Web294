@@ -40,9 +40,13 @@ const averageRating = computed(() => {
     <p class="edition_year">Année d'apparition: {{ book.editionYear }}</p>
     <p class="category" v-if="category">Categorie: {{ category.name }}</p>
     <p class="average_rating">Note moyenne: {{ averageRating }}</p>
-
-    <!-- Ajout de cette ligne -->
     <a :href="book.pdfLink" target="_blank">PDF Link</a>
+    <a v-if="$route.name === 'deletePage'" :href="'/delete/' + book.id" class="delete-link"
+      >Supprimer</a
+    >
+    <a v-if="$route.name === 'AllBooksView'" :href="'/comment/' + book.id" class="delete-link"
+      >Commenter</a
+    >
   </div>
   <div v-else>
     <p>Loading book details...</p>
