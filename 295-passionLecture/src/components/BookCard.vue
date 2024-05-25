@@ -21,6 +21,11 @@ const props = defineProps({
     type: Array,
     required: false,
     default: () => []
+  },
+  user: {
+    type: Object,
+    required: false,
+    default: () => null
   }
 })
 
@@ -33,9 +38,11 @@ const averageRating = computed(() => {
 
 <template>
   <div class="card" v-if="book && Object.keys(book).length > 0">
-    <p class="title">{{ book.title }}</p>
+    <a class="title" v-if="$route.name === 'AllBooksView'" :href="'/comment/' + book.id">{{
+      book.title
+    }}</a>
+    <p class="user">Utilisateur: {{ user ? user.username : 'Inconnu' }}</p>
     <p class="author" v-if="author">Auteur: {{ author.firstname }} {{ author.lastname }}</p>
-    <p class="author" v-else>idde l'auteur: {{ book.authorId }}</p>
     <p class="count_pages">{{ book.numberOfPages }} pages</p>
     <p class="edition_year">Année d'apparition: {{ book.editionYear }}</p>
     <p class="category" v-if="category">Categorie: {{ category.name }}</p>

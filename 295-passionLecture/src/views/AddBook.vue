@@ -23,7 +23,7 @@ const handleSubmit = async (event) => {
   formData.append('categoryId', categoryId.value)
   formData.append('imagePath', imagePath.value)
   formData.append('authorId', authorId.value)
-  formData.append('userId', 2) // Assurez-vous de gérer dynamiquement l'utilisateur actuel
+  formData.append('userId', 2)
 
   try {
     const response = await BookService.createBook(formData)

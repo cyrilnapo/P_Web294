@@ -13,7 +13,7 @@
         {{ category.name }}
       </option>
     </select>
-    <div>
+    <div class="card">
       <BookCard
         v-for="book in filteredBooks"
         :key="book.id"
@@ -21,6 +21,7 @@
         :author="authors[book.authorId]"
         :category="categories[book.categoryId]"
         :ratings="book.ratings"
+        :user="users[book.userId]"
       />
     </div>
   </main>
@@ -31,6 +32,7 @@
 import { ref, computed, onMounted } from 'vue'
 import BookService from '../services/BookService.js'
 import BookCard from '../components/BookCard.vue'
+import UserService from '@/services/UserService.js'
 
 const books = ref([])
 const categories = ref({})
@@ -49,6 +51,7 @@ const fetchBooks = () => {
       fetchCategories(response.data.data)
       fetchAuthors(response.data.data)
       fetchRatings(response.data.data)
+      fetchUsers(response.data.data)
     })
     .catch((error) => {
       loading.value = false
@@ -79,6 +82,22 @@ const fetchAuthors = (booksData) => {
       })
       .catch((error) => {
         console.error('Erreur lors de la récupération des auteurs :', error)
+      })
+  })
+}
+
+const users = ref({})
+
+const fetchUsers = (booksData) => {
+  const userIds = [...new Set(booksData.map((book) => book.userId))]
+  userIds.forEach((userId) => {
+    UserService.getUserById(userId)
+      .then((response) => {
+        users.value[userId] = response.data // Assurez-vous que response.data est l'objet utilisateur
+        console.log('User loaded:', response.data) // Log pour vérifier les données utilisateur
+      })
+      .catch((error) => {
+        console.error('Erreur lors de la récupération des utilisateurs :', error)
       })
   })
 }
@@ -117,10 +136,8 @@ const handleSearch = () => {}
 </script>
 
 <style scoped>
-div {
-  width: 50%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.card {
+  margin: 10px;
 }
 
 footer {

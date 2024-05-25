@@ -35,6 +35,9 @@ app.use('/api/books', booksRouter)
 import { loginRouter } from './routes/login.mjs'
 app.use('/api/login', loginRouter)
 
+import { usersRouter } from './routes/user.mjs'
+app.use('/api/users', usersRouter)
+
 // Si aucune route ne correspondant à l'URL demandée par le consommateur
 app.use(({ res }) => {
   const message = 'Impossible de trouver la ressource demandée ! Vous pouvez essayer une autre URL.'
