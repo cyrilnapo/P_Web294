@@ -38,25 +38,25 @@ const averageRating = computed(() => {
 
 <template>
   <div class="card" v-if="book && Object.keys(book).length > 0">
-    <a class="title" v-if="$route.name === 'AllBooksView'" :href="'/comment/' + book.id">{{
-      book.title
-    }}</a>
-    <a class="user" v-if="$route.name === 'AllBooksView'" :href="'/comment/' + book.id">{{
-      user ? user.username : 'Inconnu'
-    }}</a>
+    <div v-if="$route.name === 'AllBooksView'">
+      <a class="title" :href="'/comment/' + book.id">{{ book.title }}</a>
+      <a class="user" :href="'/comment/' + book.id">{{ user ? user.username : 'Inconnu' }}</a>
+      <p class="author" v-if="author">Auteur: {{ author.firstname }} {{ author.lastname }}</p>
+    </div>
 
-    <p class="author" v-if="author">Auteur: {{ author.firstname }} {{ author.lastname }}</p>
-    <p class="count_pages">{{ book.numberOfPages }} pages</p>
-    <p class="edition_year">Année d'apparition: {{ book.editionYear }}</p>
-    <p class="category" v-if="category">Categorie: {{ category.name }}</p>
-    <p class="average_rating">Note moyenne: {{ averageRating }}</p>
-    <a :href="book.pdfLink" target="_blank">PDF Link</a>
-    <a v-if="$route.name === 'deletePage'" :href="'/delete/' + book.id" class="delete-link"
-      >Supprimer</a
-    >
-    <a v-if="$route.name === 'AllBooksView'" :href="'/comment/' + book.id" class="delete-link"
-      >Commenter</a
-    >
+    <div v-else>
+      <p class="count_pages">{{ book.numberOfPages }} pages</p>
+      <p class="edition_year">Année d'apparition: {{ book.editionYear }}</p>
+      <p class="category" v-if="category">Categorie: {{ category.name }}</p>
+      <p class="average_rating">Note moyenne: {{ averageRating }}</p>
+      <a :href="book.pdfLink" target="_blank">PDF Link</a>
+      <a v-if="$route.name === 'deletePage'" :href="'/delete/' + book.id" class="delete-link"
+        >Supprimer</a
+      >
+      <a v-if="$route.name === 'AllBooksView'" :href="'/comment/' + book.id" class="delete-link"
+        >Commenter</a
+      >
+    </div>
   </div>
   <div v-else>
     <p>Loading book details...</p>
