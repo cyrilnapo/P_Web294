@@ -1,10 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import MainPage from '@/views/MainPage.vue'
-import AllBooksView from '@/views/AllBooksView.vue'
-import AddComment from '../views/Addcomment.vue'
-import AddBook from '../views/AddBook.vue'
-import deletePage from '@/views/DeleteBook.vue'
-import deleteBook from '@/views/bookDeleted.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,27 +12,31 @@ const router = createRouter({
     {
       path: '/AllBooksView',
       name: 'AllBooksView',
-      component: AllBooksView
+      props: true,
+      component: () => import('@/views/AllBooksView.vue')
     },
     {
       path: '/comment',
       name: 'comment',
-      component: AddComment
+      props: true,
+      component: () => import('../views/Addcomment.vue')
     },
     {
       path: '/add',
       name: 'add',
-      component: AddBook
+      component: () => import('../views/AddBook.vue')
     },
     {
       path: '/deletePage',
       name: 'deletePage',
-      component: deletePage
+      props: true,
+      component: () => import('../views/DeleteBook.vue')
     },
     {
       path: '/delete/:id',
       name: 'deleteBook',
-      component: deleteBook
+      props: true,
+      component: () => import('../views/bookDeleted.vue')
     }
   ]
 })
