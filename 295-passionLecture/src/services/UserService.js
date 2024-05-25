@@ -14,5 +14,8 @@ const apiClient = axios.create({
 export default {
   getUserById(userId) {
     return apiClient.get(`/api/users/${userId}`)
+  },
+  getCommentCount(userId) {
+    return apiClient.get(`/api/users/${userId}/comment-count`)
   }
 }
