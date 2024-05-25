@@ -37,6 +37,18 @@ const router = createRouter({
       name: 'deleteBook',
       props: true,
       component: () => import('../views/bookDeleted.vue')
+    },
+    {
+      path: '/DetailBookView/:id',
+      name: 'DetailBookView',
+      props: true,
+      component: () => import('../views/DetailBookView.vue')
+    },
+    {
+      path: '/DetailUserView/:id',
+      name: 'DetailUserView',
+      props: true,
+      component: () => import('../views/DetailUserView.vue')
     }
   ]
 })

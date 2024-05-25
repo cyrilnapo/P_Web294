@@ -39,8 +39,10 @@ const averageRating = computed(() => {
 <template>
   <div class="card" v-if="book && Object.keys(book).length > 0">
     <div v-if="$route.name === 'AllBooksView'">
-      <a class="title" :href="'/comment/' + book.id">{{ book.title }}</a>
-      <a class="user" :href="'/comment/' + book.id">{{ user ? user.username : 'Inconnu' }}</a>
+      <a class="title" :href="'/DetailBookView/' + book.id">{{ book.title }}</a>
+      <a class="user" :href="'/DetailUserView/' + book.id">{{
+        user ? user.username : 'Inconnu'
+      }}</a>
       <p class="author" v-if="author">Auteur: {{ author.firstname }} {{ author.lastname }}</p>
     </div>
 
