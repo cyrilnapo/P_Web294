@@ -1,6 +1,6 @@
 import express from 'express'
 import { auth } from '../auth/auth.mjs'
-import { User, Comment } from '../db/sequelize.mjs' // Assuming you have a User model defined in sequelize.mjs
+import { User, Comment, Book } from '../db/sequelize.mjs' // Assuming you have a User model defined in sequelize.mjs
 
 const usersRouter = express()
 
@@ -59,6 +59,25 @@ usersRouter.get('/:id/comment-count', auth, async (req, res) => {
       `Nombre de commentaires pour l'utilisateur avec l'ID ${req.params.id}: ${commentCount}`
     )
     res.json({ commentCount })
+  } catch (error) {
+    const message =
+      "Le nombre de commentaires n'a pas pu être récupéré. Veuillez réessayer dans quelques instants."
+    console.error(`Erreur lors de la récupération du nombre de commentaires: ${error.message}`)
+    res.status(500).json({ message, data: error.message })
+  }
+})
+
+usersRouter.get('/:id/book-count', auth, async (req, res) => {
+  try {
+    console.log(`Récupération du nombre de livre pour l'utilisateur avec l'ID: ${req.params.id}`)
+    // Compter le nombre de fois que l'ID de l'utilisateur apparaît dans la table des commentaires
+    const bookCount = await Book.count({
+      where: { userId: req.params.id }
+    })
+    console.log(
+      `Nombre de commentaires pour l'utilisateur avec l'ID ${req.params.id}: ${bookCount}`
+    )
+    res.json({ bookCount })
   } catch (error) {
     const message =
       "Le nombre de commentaires n'a pas pu être récupéré. Veuillez réessayer dans quelques instants."

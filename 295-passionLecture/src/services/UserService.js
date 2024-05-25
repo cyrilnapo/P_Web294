@@ -17,5 +17,8 @@ export default {
   },
   getCommentCount(userId) {
     return apiClient.get(`/api/users/${userId}/comment-count`)
+  },
+  getBookCount(userId) {
+    return apiClient.get(`/api/users/${userId}/book-count`)
   }
 }
