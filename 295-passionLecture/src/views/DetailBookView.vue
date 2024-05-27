@@ -8,6 +8,9 @@
     <p>Abstract: {{ book.abstract }}</p>
     <p>Note moyenne: {{ averageRating }}</p>
     <p>Ce livre a été ajouté par : {{ user.username }}</p>
+    <a v-if="$route.name === 'deletePage'" :href="'/delete/' + book.id" class="delete-link"
+      >Supprimer</a
+    >
   </div>
   <div v-else-if="loading">Chargement en cours...</div>
   <div v-else>Erreur: {{ error }}</div>

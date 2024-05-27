@@ -44,6 +44,7 @@ const averageRating = computed(() => {
         user ? user.username : 'Inconnu'
       }}</a>
       <p class="author" v-if="author">Auteur: {{ author.firstname }} {{ author.lastname }}</p>
+      <a :href="'/delete/' + book.id" class="delete-link">Supprimer</a>
     </div>
 
     <div v-else>
@@ -52,9 +53,7 @@ const averageRating = computed(() => {
       <p class="category" v-if="category">Categorie: {{ category.name }}</p>
       <p class="average_rating">Note moyenne: {{ averageRating }}</p>
       <a :href="book.pdfLink" target="_blank">PDF Link</a>
-      <a v-if="$route.name === 'deletePage'" :href="'/delete/' + book.id" class="delete-link"
-        >Supprimer</a
-      >
+
       <a v-if="$route.name === 'AllBooksView'" :href="'/comment/' + book.id" class="delete-link"
         >Commenter</a
       >
