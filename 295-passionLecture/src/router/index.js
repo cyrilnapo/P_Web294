@@ -37,6 +37,12 @@ const router = createRouter({
       name: 'DetailUserView',
       props: true,
       component: () => import('../views/DetailUserView.vue')
+    },
+    {
+      path: '/edit/:id',
+      name: 'edit',
+      props: true,
+      component: () => import('../views/EditBookView.vue')
     }
   ]
 })
