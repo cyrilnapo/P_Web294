@@ -20,5 +20,8 @@ export default {
   },
   getBookCount(userId) {
     return apiClient.get(`/api/users/${userId}/book-count`)
+  },
+  login(username, password) {
+    return apiClient.post('/api/login/', { username, password })
   }
 }
