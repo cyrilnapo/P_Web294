@@ -18,6 +18,7 @@ const route = useRoute()
 
 const fetchUser = () => {
   const userId = route.params.id
+  userId += 1
   UserService.getUserById(userId)
     .then((response) => {
       user.value = response.data
