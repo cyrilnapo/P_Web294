@@ -16,21 +16,9 @@ const router = createRouter({
       component: () => import('@/views/AllBooksView.vue')
     },
     {
-      path: '/comment',
-      name: 'comment',
-      props: true,
-      component: () => import('../views/Addcomment.vue')
-    },
-    {
       path: '/add',
       name: 'add',
       component: () => import('../views/AddBook.vue')
-    },
-    {
-      path: '/deletePage',
-      name: 'deletePage',
-      props: true,
-      component: () => import('../views/DeleteBook.vue')
     },
     {
       path: '/delete/:id',

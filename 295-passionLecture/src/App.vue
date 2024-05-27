@@ -9,8 +9,6 @@ import { RouterLink, RouterView } from 'vue-router'
         <RouterLink to="/">Accueil</RouterLink>
         <RouterLink to="/add">Ajouter</RouterLink>
         <RouterLink to="/AllBooksView">Ouvrages</RouterLink>
-        <RouterLink to="/comment">Commenter (ici temporairement)</RouterLink>
-        <RouterLink to="/deletePage">supprimer </RouterLink>
       </nav>
     </div>
   </header>
