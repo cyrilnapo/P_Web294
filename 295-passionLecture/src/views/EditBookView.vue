@@ -88,7 +88,6 @@ const fetchCategories = async () => {
 
 const submitForm = async () => {
   try {
-    console.log(book.value)
     await bookService.editBook(route.params.id, book.value)
     router.push('/AllBooksView')
   } catch (error) {
