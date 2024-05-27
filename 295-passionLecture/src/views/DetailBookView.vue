@@ -11,6 +11,7 @@
   </div>
   <div v-else-if="loading">Chargement en cours...</div>
   <div v-else>Erreur: {{ error }}</div>
+  <CommentSection />
 </template>
 
 <script setup>
@@ -18,6 +19,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import BookService from '../services/BookService.js'
 import UserService from '../services/UserService.js'
+import CommentSection from '@/components/CommentSection.vue'
 
 const book = ref({})
 const category = ref({})
