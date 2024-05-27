@@ -14,5 +14,8 @@ const apiClient = axios.create({
 export default {
   getCategoryById(categoryId) {
     return apiClient.get(`/api/Categories/${categoryId}`)
+  },
+  getCategories() {
+    return apiClient.get(`/api/Categories`)
   }
 }

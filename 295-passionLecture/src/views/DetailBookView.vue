@@ -8,6 +8,7 @@
     <p>Abstract: {{ book.abstract }}</p>
     <p>Note moyenne: {{ averageRating }}</p>
     <p>Ce livre a été ajouté par : {{ user.username }}</p>
+    <a :href="'/edit/' + book.id" class="edit-link"><img src="../assets/img/edit.png" /></a>
   </div>
   <div v-else-if="loading">Chargement en cours...</div>
   <div v-else>Erreur: {{ error }}</div>
@@ -86,5 +87,7 @@ onMounted(fetchBook)
 </script>
 
 <style scoped>
-/* Vos styles CSS ici */
+img {
+  max-width: 35px;
+}
 </style>

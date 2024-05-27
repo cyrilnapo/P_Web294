@@ -33,13 +33,15 @@ export default {
   getAuthor(authorId) {
     return apiClient.get(`/api/authors/${authorId}`)
   },
+  getAuthors(){
+    return apiClient.get(`/api/authors/`)
+  },
   getBookRatings(bookId) {
     return apiClient.get(`/api/books/${bookId}/notes`)
   },
   addComment(bookId, comment) {
     return apiClient.post(`/api/books/${bookId}/comments/`, comment)
   },
-
   addNote(bookId, note) {
     return apiClient.post(`/api/books/${bookId}/notes/`, note)
   }
