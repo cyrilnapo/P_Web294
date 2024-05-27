@@ -1,6 +1,7 @@
 <script setup>
-import { defineProps, computed } from 'vue'
+import { ref, computed } from 'vue'
 
+// Props définis
 const props = defineProps({
   book: {
     type: Object,
@@ -29,10 +30,19 @@ const props = defineProps({
   }
 })
 
+// Calcul de la note moyenne
 const averageRating = computed(() => {
   if (props.ratings.length === 0) return 0
   const total = props.ratings.reduce((acc, rating) => acc + rating, 0)
   return total / props.ratings.length
+})
+
+// Récupération de l'utilisateur connecté depuis le localStorage
+const loggedInUser = ref(JSON.parse(localStorage.getItem('user'))) // Assurez-vous que 'user' est bien défini dans le localStorage
+localStorage.setItem('user', JSON.stringify({ id: 2, username: 'user2' }))
+// Vérification si l'utilisateur connecté peut supprimer le livre
+const canDelete = computed(() => {
+  return loggedInUser.value && loggedInUser.value.id === props.book.userId
 })
 </script>
 
@@ -40,11 +50,11 @@ const averageRating = computed(() => {
   <div class="card" v-if="book && Object.keys(book).length > 0">
     <div v-if="$route.name === 'AllBooksView'">
       <a class="title" :href="'/DetailBookView/' + book.id">{{ book.title }}</a>
-      <a class="user" :href="'/DetailUserView/' + book.id">{{
+      <a class="user" :href="'/DetailUserView/' + book.userId">{{
         user ? user.username : 'Inconnu'
       }}</a>
       <p class="author" v-if="author">Auteur: {{ author.firstname }} {{ author.lastname }}</p>
-      <a :href="'/delete/' + book.id" class="delete-link">Supprimer</a>
+      <a v-if="canDelete" :href="'/delete/' + book.id" class="delete-link">Supprimer</a>
     </div>
 
     <div v-else>
