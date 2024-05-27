@@ -7,12 +7,13 @@ import BookService from '../services/BookService.js'
 
 const loading = ref(true)
 const error = ref(null)
+let booksCount = 5
 
 const fetchBooks = () => {
   BookService.getBooks()
     .then((response) => {
       console.log(response.data.data)
-      books.value = response.data.data
+      books.value = response.data.data.slice(0, booksCount)
       loading.value = false
     })
     .catch((error) => {
