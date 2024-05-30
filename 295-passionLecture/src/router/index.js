@@ -43,6 +43,12 @@ const router = createRouter({
       name: 'edit',
       props: true,
       component: () => import('../views/EditBookView.vue')
+    },
+    {
+      path: '/UserBook',
+      name: 'UserBook',
+      props: true,
+      component: () => import('../views/UserBook.vue')
     }
   ]
 })
