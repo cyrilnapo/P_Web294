@@ -57,8 +57,10 @@ const canDelete = computed(() => {
     </div>
 
     <div v-else>
-      <p class="count_pages">{{ book.numberOfPages }} pages</p>
-      <p class="edition_year">Année d'apparition: {{ book.editionYear }}</p>
+      <a class="title" :href="'/DetailBookView/' + book.id">{{ book.title }}</a>
+      <a class="user" :href="'/DetailUserView/' + book.userId">{{
+        user ? user.username : 'Inconnu'
+      }}</a>
       <p class="category" v-if="category">Categorie: {{ category.name }}</p>
       <p class="average_rating">Note moyenne: {{ averageRating }}</p>
       <a :href="book.pdfLink" target="_blank">PDF Link</a>

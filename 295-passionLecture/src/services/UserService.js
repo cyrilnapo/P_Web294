@@ -5,11 +5,16 @@ const apiClient = axios.create({
   withCredentials: true,
   headers: {
     Accept: 'application/json',
-    'Content-Type': 'application/json',
-    Authorization:
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE3MDczNzc2NjksImV4cCI6MTczODkzNTI2OX0.TFfSqdT9M2QqJxqgLROuXFIbTfBtYV8B2Vl4Gmeb7EI'
+    'Content-Type': 'application/json'
   }
 })
+
+// Récupérer le token du localStorage
+const token = localStorage.getItem('token')
+if (token) {
+  // Ajouter le token dans les en-têtes des requêtes
+  apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`
+}
 
 export default {
   getUserById(userId) {

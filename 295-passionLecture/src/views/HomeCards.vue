@@ -27,7 +27,7 @@ onMounted(fetchBooks)
 </script>
 
 <template>
-  <div>
+  <div class="card">
     <BookCard id="book" v-for="book in books" :key="book.id" :book="book" />
   </div>
 </template>
@@ -37,5 +37,8 @@ div {
   width: 50%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+}
+.card {
+  margin: 10px;
 }
 </style>

@@ -106,12 +106,15 @@ const fetchRatings = (booksData) => {
   bookIds.forEach((bookId) => {
     BookService.getBookRatings(bookId)
       .then((response) => {
-        const ratings = response.data.data.map((rating) => rating.note)
+        const ratingsData = response.data.data
+        const ratings = ratingsData.map((rating) => rating.note)
         const bookIndex = books.value.findIndex((book) => book.id === bookId)
+
         if (bookIndex !== -1) {
           books.value[bookIndex].ratings = ratings
         }
-        console.log(ratings)
+
+        console.log(`Book ID: ${bookId}`, ratingsData)
       })
       .catch((error) => {
         console.error('Erreur lors de la récupération des notes :', error)

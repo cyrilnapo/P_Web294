@@ -119,7 +119,7 @@ const fetchUsers = (booksData) => {
   userIds.forEach((userId) => {
     UserService.getUserById(userId)
       .then((response) => {
-        users.value[userId] = response.data // Assurez-vous que response.data est l'objet utilisateur
+        users.value[userId] = response.data
       })
       .catch((error) => {
         console.error('Erreur lors de la récupération des utilisateurs :', error)

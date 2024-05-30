@@ -5,11 +5,16 @@ const apiClient = axios.create({
   withCredentials: true,
   headers: {
     Accept: 'application/json',
-    'Content-Type': 'application/json',
-    Authorization:
-      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImlzQWRtaW4iOnRydWUsImlhdCI6MTcxNTk1NTg2NCwiZXhwIjoxNzQ3NTEzNDY0fQ.d3vf7HeTFG03bVlEK9KhTONeAmfbUQg3yd5pWhhX558'
+    'Content-Type': 'application/json'
   }
 })
+
+// Récupérer le token du localStorage
+const token = localStorage.getItem('token')
+if (token) {
+  // Ajouter le token dans les en-têtes des requêtes
+  apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`
+}
 
 export default {
   getBooks() {
@@ -33,7 +38,7 @@ export default {
   getAuthor(authorId) {
     return apiClient.get(`/api/authors/${authorId}`)
   },
-  getAuthors(){
+  getAuthors() {
     return apiClient.get(`/api/authors/`)
   },
   getBookRatings(bookId) {
