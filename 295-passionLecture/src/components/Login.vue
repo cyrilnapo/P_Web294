@@ -31,6 +31,7 @@ const handleSubmit = () => {
       message.value = response.data.message
       isError.value = false
       localStorage.setItem('token', response.data.token)
+      localStorage.setItem('user', JSON.stringify(response.data.data))
       console.log('Token:', response.data.token)
     })
     .catch((error) => {

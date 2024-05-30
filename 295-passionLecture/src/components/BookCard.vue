@@ -39,7 +39,7 @@ const averageRating = computed(() => {
 
 // Récupération de l'utilisateur connecté depuis le localStorage
 const loggedInUser = ref(JSON.parse(localStorage.getItem('user'))) // Assurez-vous que 'user' est bien défini dans le localStorage
-localStorage.setItem('user', JSON.stringify({ id: 2, username: 'user2' }))
+
 // Vérification si l'utilisateur connecté peut supprimer le livre
 const canDelete = computed(() => {
   return loggedInUser.value && loggedInUser.value.id === props.book.userId
@@ -67,7 +67,6 @@ const canDelete = computed(() => {
 
       <a v-if="$route.name === 'deletePage'" :href="'/delete/' + book.id" class="delete-link"
         >Supprimer</a
-
       >
     </div>
   </div>
