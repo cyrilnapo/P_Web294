@@ -1,22 +1,34 @@
 <template>
-  <div v-if="!loading && !error">
-    <h2>{{ book.title }}</h2>
-    <p>Auteur: {{ author.firstname }} {{ author.lastname }}</p>
-    <p>Catégorie: {{ category.name }}</p>
-    <p>Année de publication: {{ book.editionYear }}</p>
-    <p>Pages: {{ book.numberOfPages }}</p>
-    <p>Abstract: {{ book.abstract }}</p>
-    <p>Note moyenne: {{ averageRating }}</p>
-    <p>Ce livre a été ajouté par : {{ user.username }}</p>
-    <a :href="'/edit/' + book.id" class="edit-link"><img src="../assets/img/edit.png" /></a>
+  <div v-if="isLoggedIn">
+    <div v-if="!loading && !error">
+      <h2>{{ book.title }}</h2>
+      <p>Auteur: {{ author.firstname }} {{ author.lastname }}</p>
+      <p>Catégorie: {{ category.name }}</p>
+      <p>Année de publication: {{ book.editionYear }}</p>
+      <p>Pages: {{ book.numberOfPages }}</p>
+      <p>Abstract: {{ book.abstract }}</p>
+      <p>Note moyenne: {{ averageRating }}</p>
+      <p>Ce livre a été ajouté par : {{ user.username }}</p>
+      <a :href="'/edit/' + book.id" class="edit-link"><img src="../assets/img/edit.png" /></a>
 
-    <a v-if="$route.name === 'deletePage'" :href="'/delete/' + book.id" class="delete-link"
-      >Supprimer</a
-    >
+      <a v-if="$route.name === 'deletePage'" :href="'/delete/' + book.id" class="delete-link"
+        >Supprimer</a
+      >
+    </div>
+    <div v-else-if="loading">Chargement en cours...</div>
+    <div v-else>Erreur: {{ error }}</div>
+    <CommentSection />
   </div>
-  <div v-else-if="loading">Chargement en cours...</div>
-  <div v-else>Erreur: {{ error }}</div>
-  <CommentSection />
+  <div v-else>
+    <div v-if="!loading && !error">
+      <h2>{{ book.title }}</h2>
+      <p>Année de publication: {{ book.editionYear }}</p>
+      <p>Pages: {{ book.numberOfPages }}</p>
+      <p>Abstract: {{ book.abstract }}</p>
+    </div>
+    <div v-else-if="loading">Chargement en cours...</div>
+    <div v-else>Erreur: {{ error }}</div>
+  </div>
 </template>
 
 <script setup>
@@ -34,14 +46,23 @@ const error = ref(null)
 
 const route = useRoute()
 
+const loggedInUser = ref(JSON.parse(localStorage.getItem('user')))
+
+const isLoggedIn = computed(() => {
+  return loggedInUser.value !== null && loggedInUser.value !== undefined
+})
+
 const fetchBook = () => {
   BookService.getBook(route.params.id)
     .then((response) => {
       book.value = response.data.data
       loading.value = false
-      fetchCategory(response.data.data.categoryId)
-      fetchAuthor(response.data.data.authorId)
-      fetchUser(response.data.data.userId)
+      if (isLoggedIn.value == true) {
+        fetchCategory(response.data.data.categoryId)
+        fetchAuthor(response.data.data.authorId)
+        fetchUser(response.data.data.userId)
+      }
+
       // Supprimez fetchRatings car il semble que vous n'utilisez pas les notes dans ce composant
     })
     .catch((error) => {

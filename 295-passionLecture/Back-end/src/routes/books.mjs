@@ -86,7 +86,7 @@ booksRouter.get('/:id/comments/', auth, async (req, res) => {
   res.json({ message, data: book.comments })
 })
 
-booksRouter.get('/', auth, async (req, res) => {
+booksRouter.get('/', async (req, res) => {
   try {
     const books = await Book.findAll({ order: ['title'] })
     const message = 'La liste des livres a bien été récupérée.'
@@ -98,7 +98,7 @@ booksRouter.get('/', auth, async (req, res) => {
   }
 })
 
-booksRouter.get('/:id/', auth, async (req, res) => {
+booksRouter.get('/:id/', async (req, res) => {
   try {
     const book = await Book.findByPk(req.params.id)
     if (book === null) {
