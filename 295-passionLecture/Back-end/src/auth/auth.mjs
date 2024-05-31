@@ -40,7 +40,7 @@ const auth = (req, res, next) => {
         }
       }
 
-      if (req.body.userId && req.body.userId !== userId) {
+      if (!isAdmin && req.body.userId && req.body.userId !== userId) {
         const message = `L'identifiant de l'utisateur est invalide`
         return res.status(401).json({ message })
       } else {

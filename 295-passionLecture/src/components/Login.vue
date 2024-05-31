@@ -3,14 +3,14 @@
     <h2>Login</h2>
     <form @submit.prevent="handleSubmit">
       <div>
-        <label for="username">Username:</label>
+        <label for="username">Nom d'utilisateur :</label>
         <input type="text" id="username" v-model="username" required />
       </div>
       <div>
-        <label for="password">Password:</label>
+        <label for="password">Mot de Passe :</label>
         <input type="password" id="password" v-model="password" required />
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit">Se connecter</button>
     </form>
     <p v-if="message" :class="{ 'error-message': isError }">{{ message }}</p>
   </div>
@@ -28,6 +28,7 @@ const isError = ref(false)
 const handleSubmit = () => {
   UserService.login(username.value, password.value)
     .then((response) => {
+      window.location.reload()
       message.value = response.data.message
       isError.value = false
       localStorage.setItem('token', response.data.token)
