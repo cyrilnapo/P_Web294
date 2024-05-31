@@ -113,21 +113,18 @@ booksRouter.get('/:id/', async (req, res) => {
   }
 })
 
-booksRouter.post('/', auth, async (req, res) => {
+booksRouter.post('/', async (req, res) => {
   try {
-    const categoryData = { name: req.body.category }
-    const category = await Category.create(categoryData)
-
-    const authorData = {
-      lastname: req.body.author.lastname,
-      firstname: req.body.author.firstname
-    }
-    const author = await Author.create(authorData)
+    //   const categoryData = { name: req.body.category }
+    //   const category = await Category.create(categoryData)
+    //
+    //   const authorData = {
+    //     lastname: req.body.author.lastname,
+    //     firstname: req.body.author.firstname
+    //   }
+    //   const author = await Author.create(authorData)
     const data = {
-      ...req.body,
-      authorId: parseInt(author.id),
-      categoryId: parseInt(category.id),
-      userId: res.locals.userId
+      ...req.body
     }
     const newBook = await Book.create(data)
     const message = `Le livre ${newBook.title} a bien été ajouté !`

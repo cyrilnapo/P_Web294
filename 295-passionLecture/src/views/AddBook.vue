@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import BookService from '../services/BookService.js'
 
 const imagePath = ref('')
@@ -9,6 +9,21 @@ const editor = ref('')
 const editionYear = ref('')
 const categoryId = ref('')
 const authorId = ref('')
+const isAuthenticated = ref(false)
+const userId = ref(null)
+
+const checkAuthentication = () => {
+  const token = localStorage.getItem('token')
+  if (token) {
+    const user = JSON.parse(localStorage.getItem('user'))
+    userId.value = user.id
+    isAuthenticated.value = true
+  }
+}
+
+onMounted(() => {
+  checkAuthentication()
+})
 
 const handleSubmit = async (event) => {
   event.preventDefault()
@@ -23,11 +38,12 @@ const handleSubmit = async (event) => {
   formData.append('categoryId', categoryId.value)
   formData.append('imagePath', imagePath.value)
   formData.append('authorId', authorId.value)
-  formData.append('userId', 2)
+  formData.append('userId', userId.value)
 
   try {
     const response = await BookService.createBook(formData)
     console.log('Livre ajouté avec succès:', response.data)
+    window.location.href = '../UserBook'
   } catch (error) {
     console.error("Erreur lors de l'ajout du livre:", error)
   }
