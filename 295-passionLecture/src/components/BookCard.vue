@@ -37,13 +37,15 @@ const averageRating = computed(() => {
   return (total / props.ratings.length).toFixed(1)
 })
 
-
 // Récupération de l'utilisateur connecté depuis le localStorage
 const loggedInUser = ref(JSON.parse(localStorage.getItem('user')))
 
 // Vérification si l'utilisateur connecté peut supprimer le livre
 const canDelete = computed(() => {
-  return loggedInUser.value && loggedInUser.value.id === props.book.userId
+  return (
+    loggedInUser.value &&
+    (loggedInUser.value.id === props.book.userId || loggedInUser.value.isAdmin)
+  )
 })
 
 const isLoggedIn = computed(() => {
@@ -61,7 +63,6 @@ const isLoggedIn = computed(() => {
         }}</a>
         <p class="author" v-if="author">Auteur: {{ author.firstname }} {{ author.lastname }}</p>
         <p class="average_rating">Note moyenne: {{ averageRating }}</p>
-
       </div>
       <div v-else-if="$route.name === 'home'">
         <a class="title" :href="'/DetailBookView/' + book.id">{{ book.title }}</a>

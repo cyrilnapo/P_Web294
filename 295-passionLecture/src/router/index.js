@@ -49,6 +49,12 @@ const router = createRouter({
       name: 'UserBook',
       props: true,
       component: () => import('../views/UserBook.vue')
+    },
+    {
+      path: '/AdminView',
+      name: 'AdminView',
+      props: true,
+      component: () => import('@/views/AllBooksView.vue')
     }
   ]
 })
