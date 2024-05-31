@@ -34,8 +34,9 @@ const props = defineProps({
 const averageRating = computed(() => {
   if (props.ratings.length === 0) return 0
   const total = props.ratings.reduce((acc, rating) => acc + rating, 0)
-  return total / props.ratings.length
+  return (total / props.ratings.length).toFixed(1)
 })
+
 
 // Récupération de l'utilisateur connecté depuis le localStorage
 const loggedInUser = ref(JSON.parse(localStorage.getItem('user')))
