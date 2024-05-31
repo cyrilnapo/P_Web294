@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import BookService from '../services/BookService.js'
+import categoryService from '../services/CategoryService'
 
 const imagePath = ref('')
 const title = ref('')
@@ -11,6 +12,8 @@ const categoryId = ref('')
 const authorId = ref('')
 const isAuthenticated = ref(false)
 const userId = ref(null)
+const authors = ref([])
+const categories = ref([])
 
 const checkAuthentication = () => {
   const token = localStorage.getItem('token')
@@ -21,8 +24,27 @@ const checkAuthentication = () => {
   }
 }
 
+const fetchAuthors = async () => {
+  try {
+    const response = await BookService.getAuthors()
+    authors.value = response.data
+  } catch (error) {
+    console.error('Error fetching authors:', error)
+  }
+}
+
+const fetchCategories = async () => {
+  try {
+    const response = await categoryService.getCategories()
+    categories.value = response.data
+  } catch (error) {
+    console.error('Error fetching categories:', error)
+  }
+}
 onMounted(() => {
   checkAuthentication()
+  fetchAuthors()
+  fetchCategories()
 })
 
 const handleSubmit = async (event) => {
@@ -63,10 +85,22 @@ const handleSubmit = async (event) => {
       <input type="text" v-model="editor" />
       <p>Année d'édition</p>
       <input type="text" v-model="editionYear" />
-      <p>Catégorie</p>
-      <input type="text" v-model="categoryId" />
-      <p>Auteur</p>
-      <input type="text" v-model="authorId" />
+      <div>
+        <label for="author">Auteur </label>
+        <select v-model="authorId" id="author" required>
+          <option v-for="author in authors.data" :key="author.id" :value="author.id">
+            {{ author.firstname }} {{ author.lastname }}
+          </option>
+        </select>
+      </div>
+      <div>
+        <label for="category">Catégorie </label>
+        <select v-model="categoryId" id="category" required>
+          <option v-for="category in categories.data" :key="category.id" :value="category.id">
+            {{ category.name }}
+          </option>
+        </select>
+      </div>
       <button type="submit">Ajouter</button>
     </form>
   </div>
