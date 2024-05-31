@@ -59,6 +59,8 @@ const isLoggedIn = computed(() => {
           user ? user.username : 'Inconnu'
         }}</a>
         <p class="author" v-if="author">Auteur: {{ author.firstname }} {{ author.lastname }}</p>
+        <p class="average_rating">Note moyenne: {{ averageRating }}</p>
+
       </div>
       <div v-else-if="$route.name === 'home'">
         <a class="title" :href="'/DetailBookView/' + book.id">{{ book.title }}</a>
