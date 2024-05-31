@@ -9,7 +9,6 @@
       <p>Abstract: {{ book.abstract }}</p>
       <p>Note moyenne: {{ averageRating }}</p>
       <p>Ce livre a été ajouté par : {{ user.username }}</p>
-      <a :href="'/edit/' + book.id" class="edit-link"><img src="../assets/img/edit.png" /></a>
 
       <a v-if="$route.name === 'deletePage'" :href="'/delete/' + book.id" class="delete-link"
         >Supprimer</a
